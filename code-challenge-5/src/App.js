@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
 import BotCollection from './Components/BotCollection';
+// import { Routes,Route  } from 'react-router-dom';
+
 
 
 function App() {
@@ -18,7 +20,10 @@ function App() {
   
   return (
     <div className="App">
-      <BotCollection/>
+       <BotCollection lists = {bots}/>
+      
+      
+     
     
     </div>
   );
