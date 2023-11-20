@@ -7,7 +7,7 @@ function Nav() {
     
      <NavLink to="/">Home</NavLink> | 
      <NavLink to="/botcollection">BotCollection</NavLink> | 
-     <NavLink to="/botarmy">Bot-Army</NavLink>
+     <NavLink to='/botarmy/:id'>Bot-Army</NavLink>
     
     </>
   )

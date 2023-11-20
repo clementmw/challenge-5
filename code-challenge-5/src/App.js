@@ -27,7 +27,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/botcollection' element={ <BotCollection lists = {bots}/>}></Route>
-      <Route path='/botarmy' element={<BotArmy/>}></Route>
+      <Route path="/botarmy/:id" element={<BotArmy />} />
       </Routes>
       
       
