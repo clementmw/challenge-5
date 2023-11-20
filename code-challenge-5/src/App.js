@@ -1,7 +1,10 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import BotCollection from './Components/BotCollection';
-// import { Routes,Route  } from 'react-router-dom';
+import BotCollection from './pages/BotCollection';
+import { Routes,Route  } from 'react-router-dom';
+import Home from './pages/Home';
+import Nav from './Components/Nav';
+import BotArmy from './pages/BotArmy';
 
 
 
@@ -20,7 +23,13 @@ function App() {
   
   return (
     <div className="App">
-       <BotCollection lists = {bots}/>
+      <Nav/>
+      <Routes>
+      <Route path='/' element={<Home/>}></Route>
+      <Route path='/botcollection' element={ <BotCollection lists = {bots}/>}></Route>
+      <Route path='/botarmy' element={<BotArmy/>}></Route>
+      </Routes>
+      
       
       
      
