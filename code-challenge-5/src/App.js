@@ -8,6 +8,7 @@ import BotArmy from './pages/BotArmy';
 
 
 
+
 function App() {
   const [bots,setbots]= useState ([])
     
@@ -23,12 +24,14 @@ function App() {
   
   return (
     <div className="App">
+     
       <Nav/>
       <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/botcollection' element={ <BotCollection lists = {bots}/>}></Route>
-      <Route path="/botarmy/:id" element={<BotArmy />} />
+      <Route path="/botarmy" element={<BotArmy/>} />
       </Routes>
+     
       
       
       

@@ -1,45 +1,48 @@
 import React, { useState } from 'react';
+import BotArmy from './BotArmy';
 
 function BotCollection({ lists }) {
+  // const getDefaultCart = ({ list }) => {
+  //   let bot = {};
+  //   for (let i = 101; i < list.length; i++) {
+  //     bot[i] = 0;
+  //   }
+  //   return bot;
+  // };
 
-  const [toggleStates, setToggleStates] = useState({});
- 
+  const [cartItems, setCartItems] = useState({});
 
-  const handleMode = (id) => {
-    setToggleStates((prevStates) => ({
-      ...prevStates,
-      [id]: !prevStates[id],
-    }));
-    console.log("clicked")
+  const addToCart = (id) => {
+    setCartItems((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
   };
 
-  
+  const getSelectedItems = () => {
+    const selectedItems = [];
+    for (const id in cartItems) {
+      if (cartItems[id] > 0) {
+        const selectedItem = lists.find((item) => item.id === parseInt(id));
+        selectedItems.push({ ...selectedItem, quantity: cartItems[id] });
+      }
+    }
+    return selectedItems;
+  };
 
+  const selectedItems = getSelectedItems();
 
   const displayData = lists.map((list) => (
     <div key={list.id} className="col-12 col-md-4 col-lg-2 mb-4">
-    
-     <div className="card">
+      <div className="card">
         <img src={list.avatar_url} className="card-img-top" alt={`${list.name}-avatar`} />
         <div className="card-body">
           <h5 className="card-title">{list.name}</h5>
           <p className="card-text">
             <strong>Bot Class:</strong> {list.bot_class} <br />
-            {/* <strong>Health:</strong> {list.health} <br />
-            <strong>Damage:</strong> {list.damage} <br />
-            <strong>Armor:</strong> {list.armor} <br /> */}
             <strong>Catchphrase:</strong> {list.catchphrase}
           </p>
           <div className="btn-group">
-          <button
-              className={`btn ${toggleStates[list.id] ? 'btn-danger' : 'btn-success'}`}
-              style={{ marginRight: '10px' }}
-              onClick={() => handleMode(list.id)}
-            >
-              {toggleStates[list.id] ? 'Remove from Cart' : 'Add to Cart'}
+            <button onClick={() => addToCart(list.id)}>
+              ADD TO CART {cartItems[list.id] > 0 && `(${cartItems[list.id]})`}
             </button>
-            
-            
           </div>
         </div>
       </div>
@@ -47,8 +50,9 @@ function BotCollection({ lists }) {
   ));
 
   return (
-    <div className="row row-cols-1 row-cols-md-5 g-4">
-      {displayData}
+    <div>
+      <div className="row row-cols-1 row-cols-md-5 g-4">{displayData}</div>
+      {selectedItems.length > 0 && <BotArmy selectedItems={selectedItems} />}
     </div>
   );
 }

@@ -1,25 +1,22 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
-function BotArmy() {
-  const { id } = useParams();
-  const addedBots = JSON.parse(localStorage.getItem('addedBots')) || [];
-
-  // Find the selected bot from the array
-  const selectedBot = addedBots.find((bot) => bot.id === parseInt(id));
-
+function BotArmy({ selectedItems }) {
   return (
     <div>
-      <h2>Bot Army</h2>
-      {selectedBot ? (
-        <div>
-          <p>Selected Bot ID: {selectedBot.id}</p>
-          <p>Bot Name: {selectedBot.name}</p>
-          {/* Include other bot details as needed */}
+      <h1>Bot Army</h1>
+      {selectedItems.map((item) => (
+        <div key={item.id} className="card">
+          <img src={item.avatar_url} className="card-img-top" alt={`${item.name}-avatar`} />
+          <div className="card-body">
+            <h5 className="card-title">{item.name}</h5>
+            <p className="card-text">
+              <strong>Bot Class:</strong> {item.bot_class} <br />
+              <strong>Catchphrase:</strong> {item.catchphrase} <br />
+              <strong>Quantity:</strong> {item.quantity}
+            </p>
+          </div>
         </div>
-      ) : (
-        <p>Bot not found in the Bot Army.</p>
-      )}
+      ))}
     </div>
   );
 }
